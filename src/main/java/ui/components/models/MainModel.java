@@ -52,7 +52,7 @@ public class MainModel {
 
     @Step
     public  BookmarksModel clickAtBookmarksLink(){
-        click(Locators.MainPage.LNK_BOOKMARKS.get(languagePrefix));
+        jsClick(Locators.MainPage.LNK_BOOKMARKS.get(languagePrefix));
         return new BookmarksModel(languagePrefix);
     }
 }

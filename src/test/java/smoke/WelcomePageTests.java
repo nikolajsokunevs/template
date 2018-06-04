@@ -11,7 +11,7 @@ import java.util.List;
 
 @Feature("Smoke")
 public class WelcomePageTests extends TestContext {
-    
+
     @ParameterizedTest
     @ValueSource(strings = {"RU"})
     @Story("Welcome Page")
