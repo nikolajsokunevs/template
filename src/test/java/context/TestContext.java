@@ -10,6 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import static support.web.WebElementHelper.navigateToPage;
+
+import ui.components.locators.Locators;
 import ui.components.models.MainModel;
 
 import static config.ApplicationProperties.ApplicationProperty.APP_URL;
@@ -40,8 +42,10 @@ public class TestContext {
         DriverBase.clearCookies();
     }
 
-    public MainModel open(){
+    public MainModel open(String language){
         navigateToPage(ApplicationProperties.getString(APP_URL));
-        return new MainModel();
+        MainModel mainModel=new MainModel(language);
+        mainModel.changeLanguage();
+        return mainModel;
     }
 }

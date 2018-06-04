@@ -37,7 +37,12 @@ public class WebElementHelper {
 
     public static WebElement waitForElement(By locator) {
         WebDriverWait webDriverWait = new WebDriverWait(DriverBase.getDriver(), ApplicationProperties.getInteger(WAIT_TIMEOUT_SHT));
-        return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        return webDriverWait.until(ExpectedConditions.presenceOfElementLocated(locator));
+    }
+
+    public static boolean waitForInivsibilityOfElement(By locator) {
+        WebDriverWait webDriverWait = new WebDriverWait(DriverBase.getDriver(), ApplicationProperties.getInteger(WAIT_TIMEOUT_SHT));
+        return webDriverWait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 
     public static List<WebElement> waitForElements(By locator) {
@@ -99,6 +104,10 @@ public class WebElementHelper {
         return waitForVisibility(locator).getText();
     }
 
+    public static String getAttribute(By locator, String attribute) {
+        return waitForElement(locator).getAttribute(attribute);
+    }
+
     public static String getValue(By locator) {
         return waitForVisibility(locator).getAttribute("value");
     }
@@ -135,5 +144,18 @@ public class WebElementHelper {
     public static void mouseOver(By locator) {
         Actions action = new Actions(DriverBase.getDriver());
         action.moveToElement(waitForElement(locator)).build().perform();
+    }
+
+    public static void executeJS(String command) {
+        JavascriptExecutor executor = (JavascriptExecutor)DriverBase.getDriver();
+        executor.executeScript(command);
+    }
+
+    public static void sleep(int timeoutInMilisseconds) {
+        try {
+            Thread.sleep(timeoutInMilisseconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
