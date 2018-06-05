@@ -32,11 +32,12 @@ public class TestContext {
 
     @BeforeAll
     public static void instantiateDriverObject() {
-        DriverBase.instantiateDriverObject();
+
     }
 
     @BeforeEach
     public void setUp(TestInfo testInfo){
+        DriverBase.instantiateDriverObject();
         driver = DriverBase.getDriver();
         driver.manage().window().maximize();
         setupTestData(testInfo.getTestMethod().get().getName());
@@ -44,12 +45,13 @@ public class TestContext {
 
     @AfterAll
     public static void closeDriverObjects() {
-        DriverBase.closeDriverObjects();
+
     }
 
     @AfterEach
     public void clearCookies() throws Exception {
         DriverBase.clearCookies();
+        DriverBase.closeDriverObjects();
     }
 
     public MainModel open(String language){

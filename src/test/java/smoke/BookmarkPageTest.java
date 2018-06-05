@@ -13,7 +13,7 @@ import java.util.List;
 public class BookmarkPageTest extends TestContext {
 
     @ParameterizedTest
-    @ValueSource(strings = {"RU", "LV"})
+    @ValueSource(strings = {"RU", "LV", "EN", "FR"})
     @Story("Bookmark screen tests")
     void verifyItemsCanBeAddedToBookmarkListTest(String language) {
         List<SearchResultItem> randomSearchResultsFromRandomScreens = new ArrayList<>();
