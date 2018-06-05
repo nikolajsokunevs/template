@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Feature("Smoke")
-public class BookmarkPageTests extends TestContext {
+public class BookmarkPageTest extends TestContext {
 
     @ParameterizedTest
-    @ValueSource(strings = {"RU"})
-    @Story("Welcome Page")
-    void verifyItemsCanBeAddedToBookmarkList(String language) {
+    @ValueSource(strings = {"RU1"})
+    @Story("Bookmark screen tests")
+    void verifyItemsCanBeAddedToBookmarkListTest(String language) {
 
         List<SearchResultItem> randomSearchResultsFromRandomScreens = new ArrayList<>();
 

@@ -29,7 +29,7 @@ public class MainModel {
         boolean languageIsNotSelected = true;
         long startTime = System.currentTimeMillis();
 
-        while (languageIsNotSelected && lessThan10Seconds(startTime)) {
+        while (languageIsNotSelected && lessThan5Seconds(startTime)) {
             Matcher matcher = pattern.matcher(getAttribute(Locators.MainPage.THN_META_LANGUAGE.get(), "content"));
             if (matcher.find() && !languagePrefix.equalsIgnoreCase(matcher.group(1))) {
                 click(Locators.MainPage.LNK_LANGUAGE.get());
