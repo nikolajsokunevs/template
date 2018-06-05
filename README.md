@@ -1,4 +1,4 @@
-Selenium / Feign (REST) / JUnit5 sample project
+Selenium / Allure / JUnit5 
 =======================
 ### How to run test?
         mvn clean install test    - execute all tests
