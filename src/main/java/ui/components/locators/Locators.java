@@ -1,9 +1,7 @@
 package ui.components.locators;
 
 import org.openqa.selenium.By;
-
 import java.util.function.Function;
-
 import static java.lang.String.format;
 
 public class Locators {
@@ -45,8 +43,7 @@ public class Locators {
         BTN_SEARCH(By::cssSelector, "#sbtn"),
 
         THN_PRELOAD_BLOCK(By::cssSelector, "#preload_txt"),
-        LBL_PRELOAD_FIRST_ITEM(By::cssSelector, "#cmp_1"),
-        ;
+        LBL_PRELOAD_FIRST_ITEM(By::cssSelector, "#cmp_1"),;
         private String id;
         private Function<String, By> function;
 
@@ -78,8 +75,7 @@ public class Locators {
         LBL_SEARCH_RESULT_ITEM_CATEGORY_REL(By::xpath, "./../../td[3]/div[1]"),
         LBL_SEARCH_RESULT_ITEM_DESCRIPTION_REL(By::xpath, "./../../td[3]/div[2]/a"),
         LBL_SEARCH_RESULT_ITEM_PRICE_REL(By::xpath, "./../../td[4]/a"),
-        BTN_PAGE_NUMBERS(By::cssSelector, "td[valign='top']>div.td2 a[name='nav_id'][rel='next']")
-        ;
+        BTN_PAGE_NUMBERS(By::cssSelector, "td[valign='top']>div.td2 a[name='nav_id'][rel='next']");
         private String id;
         private Function<String, By> function;
 
@@ -106,8 +102,7 @@ public class Locators {
         LBL_BOOKMARK_ITEM_IMG_ID_REL(By::xpath, "./td[2]/a"),
         LBL_BOOKMARK_ITEM_CATEGORY_REL(By::xpath, "./../tr[1]/td[1]"),
         LBL_BOOKMARK_ITEM_DESCRIPTION_REL(By::xpath, "./td[3]/div/a"),
-        LBL_BOOKMARK_ITEM_PRICE_REL(By::xpath, "./td[last()]/a"),
-        ;
+        LBL_BOOKMARK_ITEM_PRICE_REL(By::xpath, "./td[last()]/a"),;
         private String id;
         private Function<String, By> function;
 

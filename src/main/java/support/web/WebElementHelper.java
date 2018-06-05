@@ -3,7 +3,6 @@ package support.web;
 import config.ApplicationProperties;
 import config.webdriver.DriverBase;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -70,7 +69,7 @@ public class WebElementHelper {
     public static void sendKeys(By locator, String text) {
         logger.info("Setting textbox value - " + text);
         WebDriverWait webDriverWait = new WebDriverWait(DriverBase.getDriver(), ApplicationProperties.getInteger(WAIT_TIMEOUT_SHT));
-        WebElement webElement=webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        WebElement webElement = webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         webElement.clear();
         webElement.sendKeys(text);
     }
@@ -81,7 +80,7 @@ public class WebElementHelper {
 
     public static void jsClick(By locator) {
         WebElement element = waitForElement(locator);
-        JavascriptExecutor executor = (JavascriptExecutor)DriverBase.getDriver();
+        JavascriptExecutor executor = (JavascriptExecutor) DriverBase.getDriver();
         executor.executeScript("arguments[0].click();", element);
     }
 
@@ -112,13 +111,13 @@ public class WebElementHelper {
         return waitForVisibility(locator).getAttribute("value");
     }
 
-    public static void setValueForCheckbox(By locator, boolean value){
-        if (isSelected(locator)!=value){
+    public static void setValueForCheckbox(By locator, boolean value) {
+        if (isSelected(locator) != value) {
             waitForElement(locator).click();
         }
     }
 
-    public static  boolean isSelected(By locator){
+    public static boolean isSelected(By locator) {
         return waitForElement(locator).isSelected();
     }
 
@@ -147,7 +146,7 @@ public class WebElementHelper {
     }
 
     public static void executeJS(String command) {
-        JavascriptExecutor executor = (JavascriptExecutor)DriverBase.getDriver();
+        JavascriptExecutor executor = (JavascriptExecutor) DriverBase.getDriver();
         executor.executeScript(command);
     }
 

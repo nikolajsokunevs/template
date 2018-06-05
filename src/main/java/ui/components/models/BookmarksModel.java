@@ -14,7 +14,7 @@ import static support.web.WebElementHelper.*;
 import static ui.components.locators.Locators.BookmarkPage.*;
 import static org.assertj.core.api.Assertions.*;
 
-public class BookmarksModel extends MainModel{
+public class BookmarksModel extends MainModel {
 
     public BookmarksModel(String languagePrefix) {
         super(languagePrefix);
@@ -24,33 +24,33 @@ public class BookmarksModel extends MainModel{
 
     @Step
     public BookmarksModel verifyAllExpectedItemsAreDisplayed(List<SearchResultItem> selectedItems) {
-        List<SearchResultItem> actualList=GetAllItemsFromTheScreen();
+        List<SearchResultItem> actualList = GetAllItemsFromTheScreen();
         assertThat(selectedItems.size()).isEqualTo(actualList.size());
         assertThat(actualList).containsAll(selectedItems);
         return this;
     }
 
 
-    private List<SearchResultItem> GetAllItemsFromTheScreen(){
+    private List<SearchResultItem> GetAllItemsFromTheScreen() {
         waitForElements(ALL_ITEMS.get());
-        List<SearchResultItem> actualList=new ArrayList<>();
-        List<WebElement> tables=waitForElements(LBL_TABLE_HEADER.get());
-        for (WebElement table:tables){
+        List<SearchResultItem> actualList = new ArrayList<>();
+        List<WebElement> tables = waitForElements(LBL_TABLE_HEADER.get());
+        for (WebElement table : tables) {
             actualList.addAll(GetAllItemsFromTable(table));
         }
         return actualList;
     }
 
-    private List<SearchResultItem> GetAllItemsFromTable(WebElement table){
-        List<SearchResultItem> actualList=new ArrayList<>();
-        List<WebElement> itemsInTable=table.findElements(By.xpath("./following-sibling::tr"));
-        for (WebElement item:itemsInTable){
+    private List<SearchResultItem> GetAllItemsFromTable(WebElement table) {
+        List<SearchResultItem> actualList = new ArrayList<>();
+        List<WebElement> itemsInTable = table.findElements(By.xpath("./following-sibling::tr"));
+        for (WebElement item : itemsInTable) {
             actualList.add(ConvertWebElementItemToDto(item));
         }
         return actualList;
     }
 
-    private SearchResultItem ConvertWebElementItemToDto(WebElement item){
+    private SearchResultItem ConvertWebElementItemToDto(WebElement item) {
         String imageSrc = item.findElement(LBL_BOOKMARK_ITEM_IMG_SRC_REL.get()).getAttribute("src");
         String imageId = item.findElement(LBL_BOOKMARK_ITEM_IMG_ID_REL.get()).getAttribute("id");
         String category = item.findElement(LBL_BOOKMARK_ITEM_CATEGORY_REL.get()).getText();
