@@ -2,7 +2,6 @@ package ui.components.models;
 
 import dto.SearchResultItem;
 import io.qameta.allure.Step;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;

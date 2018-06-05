@@ -12,9 +12,9 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+
 import static support.web.WebElementHelper.navigateToPage;
 
-import ui.components.locators.Locators;
 import ui.components.models.MainModel;
 import utils.DataProvider;
 
@@ -36,10 +36,9 @@ public class TestContext {
     }
 
     @BeforeEach
-    public void setUp(TestInfo testInfo){
+    public void setUp(TestInfo testInfo) {
         DriverBase.instantiateDriverObject();
         driver = DriverBase.getDriver();
-        driver.manage().window().maximize();
         setupTestData(testInfo.getTestMethod().get().getName());
     }
 
@@ -54,16 +53,16 @@ public class TestContext {
         DriverBase.closeDriverObjects();
     }
 
-    public MainModel open(String language){
+    public MainModel open(String language) {
         navigateToPage(ApplicationProperties.getString(APP_URL));
-        MainModel mainModel=new MainModel(language);
+        MainModel mainModel = new MainModel(language);
         mainModel.changeLanguage();
         return mainModel;
     }
 
-    private void setupTestData(String name){
-        if(new File("./src/test/resources/"+name+".json").exists()){
-            data=new DataProvider(name);
+    private void setupTestData(String name) {
+        if (new File("./src/test/resources/" + name + ".json").exists()) {
+            data = new DataProvider(name);
         }
     }
 
@@ -76,6 +75,8 @@ public class TestContext {
             if (isFailed) {
                 captureScreen(context.getTestMethod().get().getName() + context.getDisplayName());
             }
+            if (new File("log.log").exists())
+                attachLog();
         }
 
         public String captureScreen(String testName) {
@@ -94,6 +95,13 @@ public class TestContext {
         @Attachment("Screenshot on failure")
         public byte[] makeScreenshotOnFailure(WebDriver driver) {
             return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+        }
+
+        @Attachment("Log")
+        public byte[] attachLog() throws IOException {
+            byte[] log = FileUtils.readFileToByteArray(new File("log.log"));
+            FileUtils.forceDeleteOnExit(new File("log.log"));
+            return log;
         }
     }
 

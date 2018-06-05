@@ -14,7 +14,7 @@ public class SearchResultItem {
         this.imageSRC = imageSRC;
         this.imgId = imgId;
         this.categoryName = categoryName;
-        this.description = description;
+        setDescription(description);
         this.price = price;
     }
 
@@ -47,6 +47,9 @@ public class SearchResultItem {
     }
 
     public void setDescription(String description) {
+        if (description.length()>80){
+            description.substring(0, 80);
+        }
         this.description = description;
     }
 

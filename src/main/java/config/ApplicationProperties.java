@@ -18,14 +18,22 @@ public class ApplicationProperties {
                     setProperty(ApplicationProperty.WAIT_TIMEOUT.value, "10");
                     setProperty(ApplicationProperty.WAIT_TIMEOUT_LNG.value, "30");
 
-                    setProperty(ApplicationProperty.TARGET_BROWSER.value, "FIREFOX"); //PHANTOMJS, OPERA, SAFARI, EDGE, IE, CHROME, FIREFOX
+                    setProperty(ApplicationProperty.TARGET_BROWSER.value, "CHROME"); //PHANTOMJS, OPERA, SAFARI, EDGE, IE, CHROME, FIREFOX
 
                     //application URL's
                     setProperty(ApplicationProperty.APP_URL.value, "http://ss.com");
 
                     //Selenium grid settings
                     setProperty(ApplicationProperty.REMOTE_DRIVER.value, "false");
-                    setProperty(ApplicationProperty.SELENIUM_GRID_URL.value, "http://selenium-hub:8080/wd/hub");
+                    setProperty(ApplicationProperty.SELENIUM_GRID_URL.value, "http://localhost:4444/wd/hub");
+                    setProperty(ApplicationProperty.DESIRED_BROWSER_VERSION.value, "");
+                    setProperty(ApplicationProperty.DESIRED_PLATFORM.value, "");
+
+                    //Proxy settings
+                    setProperty(ApplicationProperty.BROWSER_PROXY_ENABLED.value, "false");
+                    setProperty(ApplicationProperty.PROXY_HOST.value, "10.23.2.250");
+                    setProperty(ApplicationProperty.PROXY_PORT.value, "8080");
+
 
                 }
             });
@@ -90,8 +98,13 @@ public class ApplicationProperties {
         WAIT_TIMEOUT_SHT("application.timeoutShort"),
         WAIT_TIMEOUT("application.timeoutRegular"),
         WAIT_TIMEOUT_LNG("application.timeoutLong"),
+        SELENIUM_GRID_VIDEO_CAPTURE_ENABLED("selenium.videoCapture"),
+        SELENIUM_GRID_VIDEO_CAPTURE_URL("selenium.videoUrl"),
         PROXY_HOST("proxy.proxyHost"), PROXY_PORT("proxy.proxyPort"),
         REMOTE_DRIVER("selenium.remoteDriver"),
+        DESIRED_BROWSER_VERSION("selenium.desiredBrowserVersion"),
+        DESIRED_PLATFORM("selenium.desiredPlatform"),
+        BROWSER_PROXY_ENABLED("proxy.browserProxyEnabled"),
         SELENIUM_GRID_URL("selenium.seleniumGridURL");
 
         private String value;

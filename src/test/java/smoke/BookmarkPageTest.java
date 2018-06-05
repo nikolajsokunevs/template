@@ -4,6 +4,7 @@ import context.TestContext;
 import dto.SearchResultItem;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import java.util.ArrayList;
@@ -13,7 +14,8 @@ import java.util.List;
 public class BookmarkPageTest extends TestContext {
 
     @ParameterizedTest
-    @ValueSource(strings = {"RU", "LV", "EN", "FR"})
+    //@ValueSource(strings = {"RU", "EN", "LV", "EE"})
+    @ValueSource(strings = {"RU"})
     @Story("Bookmark screen tests")
     void verifyItemsCanBeAddedToBookmarkListTest(String language) {
         List<SearchResultItem> randomSearchResultsFromRandomScreens = new ArrayList<>();
