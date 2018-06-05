@@ -22,4 +22,3 @@ Also you can specify where to run tests, on lochal machine, or grid:
 
 docker-compose file is created, you can setup local grid with docker command: 
 - docker-compose -f docker-compose.yaml up
-
