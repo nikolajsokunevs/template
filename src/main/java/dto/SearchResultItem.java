@@ -10,9 +10,6 @@ public class SearchResultItem {
     private String description;
     private String price;
 
-    public SearchResultItem() {
-    }
-
     public SearchResultItem(String imageSRC, String imgId, String categoryName, String description, String price) {
         this.imageSRC = imageSRC;
         this.imgId = imgId;
@@ -86,5 +83,9 @@ public class SearchResultItem {
                 .append(description)
                 .append(price)
                 .toHashCode();
+    }
+    @Override
+    public String toString() {
+        return String.format("Image src: '%s', Image id: '%s', Category: '%s', Description: '%s', Price: '%s'", this.imageSRC, this.imgId, this.categoryName, this.description, this.price);
     }
 }

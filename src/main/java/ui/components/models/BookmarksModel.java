@@ -7,16 +7,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ui.components.locators.Locators;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 import static support.web.WebElementHelper.*;
 import static ui.components.locators.Locators.BookmarkPage.*;
-import static ui.components.locators.Locators.SearchResultPage.*;
-import static ui.components.locators.Locators.SearchResultPage.LBL_SEARCH_RESULT_ITEM_PRICE_REL;
+import static org.assertj.core.api.Assertions.*;
 
 public class BookmarksModel extends MainModel{
 
@@ -26,21 +23,17 @@ public class BookmarksModel extends MainModel{
 
     private static final Logger logger = LoggerFactory.getLogger(BookmarksModel.class);
 
-
     @Step
     public BookmarksModel verifyAllExpectedItemsAreDisplayed(List<SearchResultItem> selectedItems) {
-        VerifyTotalCountEqualsToExpected(selectedItems);
         List<SearchResultItem> actualList=GetAllItemsFromTheScreen();
-        Predicate<SearchResultItem> condition = e -> selectedItems.contains(e);
-        Assertions.assertTrue(actualList.stream().allMatch(condition));
+        assertThat(selectedItems.size()).isEqualTo(actualList.size());
+        assertThat(actualList).containsAll(selectedItems);
         return this;
     }
 
-    private void VerifyTotalCountEqualsToExpected(List<SearchResultItem> selectedItems){
-        Assertions.assertEquals(selectedItems.size(), waitForElements(ALL_ITEMS.get()).size());
-    }
 
     private List<SearchResultItem> GetAllItemsFromTheScreen(){
+        waitForElements(ALL_ITEMS.get());
         List<SearchResultItem> actualList=new ArrayList<>();
         List<WebElement> tables=waitForElements(LBL_TABLE_HEADER.get());
         for (WebElement table:tables){
