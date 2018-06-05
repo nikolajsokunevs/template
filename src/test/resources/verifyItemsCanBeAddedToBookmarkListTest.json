@@ -1,0 +1,17 @@
+{
+  "en": {
+    "searchText":"Компьютер",
+    "location": "Riga",
+    "transactionType": "Sale"
+  },
+  "ru": {
+    "searchText":"Компьютер",
+    "location": "Рига",
+    "transactionType": "Продажа"
+  },
+  "lv": {
+    "searchText":"Компьютер",
+    "location": "Rīga",
+    "transactionType": "Pārdod"
+  }
+}

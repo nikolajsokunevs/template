@@ -1,11 +1,13 @@
 package ui.components.models;
 
 import dto.SearchResultItem;
+import exception.IncorrectTestDataException;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ui.components.locators.Locators;
+import utils.DataProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,11 @@ public class SearchResultModel extends MainModel {
     @Step
     public SearchResultModel setTransactionType(String value) {
         selectByVisiableText(Locators.SearchResultPage.CMB_TRANSACTION_TYPE.get(), value);
+        return this;
+    }
+
+    public SearchResultModel setTransactionType(DataProvider data) {
+        setTransactionType(data.getData(languagePrefix, "transactionType"));
         return this;
     }
 
@@ -76,6 +83,8 @@ public class SearchResultModel extends MainModel {
             String price = randomItem.findElement(LBL_SEARCH_RESULT_ITEM_PRICE_REL.get()).getText();
             SearchResultItem searchResultRandomItemDTO = new SearchResultItem(imageSrc, imageId, category, description, price);
             selectedItems.add(searchResultRandomItemDTO);
+        }else {
+            throw new IncorrectTestDataException("Page does not contain unchecked items");
         }
     }
 

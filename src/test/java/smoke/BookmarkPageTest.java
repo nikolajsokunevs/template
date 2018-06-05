@@ -13,19 +13,18 @@ import java.util.List;
 public class BookmarkPageTest extends TestContext {
 
     @ParameterizedTest
-    @ValueSource(strings = {"RU1"})
+    @ValueSource(strings = {"RU", "LV"})
     @Story("Bookmark screen tests")
     void verifyItemsCanBeAddedToBookmarkListTest(String language) {
-
         List<SearchResultItem> randomSearchResultsFromRandomScreens = new ArrayList<>();
 
         open(language)
                 .goToElectronicPage()
                 .clickAtSearchLink()
-                .setSearchByTextValue("Компьютер")
-                .setLocation("Рига")
+                .setSearchByTextValue(data)
+                .setLocation(data)
                 .clickSearchButton()
-                .setTransactionType("Продажа")
+                .setTransactionType(data)
                 .sortByPrice()
                 .clickAtExtendedSearchLink()
                 .setMinAndMaxPrice(0, 300)

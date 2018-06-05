@@ -5,10 +5,7 @@ import config.webdriver.DriverBase;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.junit5.AllureJunit5AnnotationProcessor;
 import org.apache.commons.io.FileUtils;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -19,6 +16,7 @@ import static support.web.WebElementHelper.navigateToPage;
 
 import ui.components.locators.Locators;
 import ui.components.models.MainModel;
+import utils.DataProvider;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,6 +28,7 @@ import static config.ApplicationProperties.ApplicationProperty.APP_URL;
 public class TestContext {
 
     protected WebDriver driver;
+    protected DataProvider data;
 
     @BeforeAll
     public static void instantiateDriverObject() {
@@ -37,9 +36,10 @@ public class TestContext {
     }
 
     @BeforeEach
-    public void setUp(){
+    public void setUp(TestInfo testInfo){
         driver = DriverBase.getDriver();
         driver.manage().window().maximize();
+        setupTestData(testInfo.getTestMethod().get().getName());
     }
 
     @AfterAll
@@ -59,7 +59,11 @@ public class TestContext {
         return mainModel;
     }
 
-
+    private void setupTestData(String name){
+        if(new File("./src/test/resources/"+name+".json").exists()){
+            data=new DataProvider(name);
+        }
+    }
 
     public static class AfterTestExecution implements AfterTestExecutionCallback {
 

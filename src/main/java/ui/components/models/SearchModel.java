@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ui.components.locators.Locators;
+import utils.DataProvider;
 
 import static support.web.WebElementHelper.*;
 
@@ -26,9 +27,18 @@ public class SearchModel extends MainModel{
         return this;
     }
 
+    public SearchModel setSearchByTextValue(DataProvider data){
+        return setSearchByTextValue(data.getData(languagePrefix, "searchText"));
+    }
+
     @Step
     public SearchModel setLocation(String value){
         selectByVisiableText(Locators.SearchPage.CMB_SEARCH_REGION.get(), value);
+        return this;
+    }
+
+    public SearchModel setLocation(DataProvider data){
+        setLocation(data.getData(languagePrefix, "location"));
         return this;
     }
 
