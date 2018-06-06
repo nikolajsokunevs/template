@@ -6,7 +6,6 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ui.components.locators.Locators;
 import utils.DataProvider;
 import java.util.List;
 import java.util.Random;
@@ -24,7 +23,7 @@ public class SearchResultModel extends MainModel {
 
     @Step
     public SearchResultModel setTransactionType(String value) {
-        selectByVisiableText(Locators.SearchResultPage.CMB_TRANSACTION_TYPE.get(), value);
+        selectByVisiableText(CMB_TRANSACTION_TYPE.get(), value);
         return this;
     }
 
@@ -35,13 +34,13 @@ public class SearchResultModel extends MainModel {
 
     @Step
     public SearchResultModel sortByPrice() {
-        click(Locators.SearchResultPage.LNK_PRICE.get());
+        click(LNK_PRICE.get());
         return this;
     }
 
     @Step
     public SearchModel clickAtExtendedSearchLink() {
-        click(Locators.SearchResultPage.LNK_EXTENDED_SEARCH.get());
+        click(LNK_EXTENDED_SEARCH.get());
         return new SearchModel(languagePrefix);
     }
 
@@ -62,14 +61,14 @@ public class SearchResultModel extends MainModel {
     }
 
     private void navigateToRandomPage() {
-        List<WebElement> pages = waitForElements(Locators.SearchResultPage.BTN_PAGE_NUMBERS.get());
+        List<WebElement> pages = waitForElements(BTN_PAGE_NUMBERS.get());
         if (pages.size() > 0) {
             pages.get(new Random().nextInt(pages.size())).click();
         }
     }
 
     private void selectRandomItemOnCurrentPage(List<SearchResultItem> selectedItems) {
-        List<WebElement> items = waitForElements(Locators.SearchResultPage.NOT_SELECTED_SEARCH_RESULT_ITEMS.get());
+        List<WebElement> items = waitForElements(NOT_SELECTED_SEARCH_RESULT_ITEMS.get());
         if (items.size() > 0) {
             int randomNumberFromList = new Random().nextInt(items.size());
             WebElement randomItem = items.get(randomNumberFromList);

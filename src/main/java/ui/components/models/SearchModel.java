@@ -3,7 +3,7 @@ package ui.components.models;
 import io.qameta.allure.Step;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ui.components.locators.Locators;
+import static ui.components.locators.Locators.SearchPage.*;
 import utils.DataProvider;
 
 import static support.web.WebElementHelper.*;
@@ -18,11 +18,12 @@ public class SearchModel extends MainModel {
 
     @Step
     public SearchModel setSearchByTextValue(String value) {
-        sendKeys(Locators.SearchPage.TXT_MAIN_INPUT.get(), value);
+        sendKeys(TXT_MAIN_INPUT.get(), value);
         //Close preload with JS
-        sleep(1000);
+        waitForElement(THN_PRELOAD_BLOCK_DISPLAYED.get());
+        sleep(300);
         executeJS("show_s_dv('none',1);");
-        waitForInivsibilityOfElement(Locators.SearchPage.LBL_PRELOAD_FIRST_ITEM.get());
+        waitForInivsibilityOfElement(LBL_PRELOAD_FIRST_ITEM.get());
         return this;
     }
 
@@ -32,7 +33,7 @@ public class SearchModel extends MainModel {
 
     @Step
     public SearchModel setLocation(String value) {
-        selectByVisiableText(Locators.SearchPage.CMB_SEARCH_REGION.get(), value);
+        selectByVisiableText(CMB_SEARCH_REGION.get(), value);
         return this;
     }
 
@@ -43,8 +44,8 @@ public class SearchModel extends MainModel {
 
     @Step
     public SearchModel setMinAndMaxPrice(String min, String max) {
-        sendKeys(Locators.SearchPage.TXT_PRICE_MIN.get(), min);
-        sendKeys(Locators.SearchPage.TXT_PRICE_MAX.get(), max);
+        sendKeys(TXT_PRICE_MIN.get(), min);
+        sendKeys(TXT_PRICE_MAX.get(), max);
         return this;
     }
 
@@ -54,7 +55,7 @@ public class SearchModel extends MainModel {
 
     @Step
     public SearchResultModel clickSearchButton() {
-        click(Locators.SearchPage.BTN_SEARCH.get());
+        click(BTN_SEARCH.get());
         return new SearchResultModel(languagePrefix);
     }
 

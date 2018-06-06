@@ -42,7 +42,7 @@ public class Locators {
         CMB_SORT(By::name, "sort"),
         BTN_SEARCH(By::cssSelector, "#sbtn"),
 
-        THN_PRELOAD_BLOCK(By::cssSelector, "#preload_txt"),
+        THN_PRELOAD_BLOCK_DISPLAYED(By::xpath, "//div[@id='preload_txt'][contains(@style, 'display: block;')]"),
         LBL_PRELOAD_FIRST_ITEM(By::cssSelector, "#cmp_1"),;
         private String id;
         private Function<String, By> function;
