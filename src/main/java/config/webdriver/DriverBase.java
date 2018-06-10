@@ -10,15 +10,9 @@ public class DriverBase {
     private static List<DriverFactory> webDriverThreadPool = Collections.synchronizedList(new ArrayList<DriverFactory>());
     private static ThreadLocal<DriverFactory> driverFactory;
 
-    public static void instantiateDriverObject() {
-        driverFactory = new ThreadLocal<DriverFactory>() {
-            @Override
-            protected DriverFactory initialValue() {
-                DriverFactory driverFactory = new DriverFactory();
-                webDriverThreadPool.add(driverFactory);
-                return driverFactory;
-            }
-        };
+    static {
+        driverFactory=ThreadLocal.withInitial(DriverFactory::new);
+        webDriverThreadPool.add(driverFactory.get());
     }
 
     public static WebDriver getDriver() {

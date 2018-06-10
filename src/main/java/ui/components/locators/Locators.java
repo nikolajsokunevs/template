@@ -4,10 +4,11 @@ import org.openqa.selenium.By;
 import java.util.function.Function;
 import static java.lang.String.format;
 
-public class Locators {
+public interface Locators {
 
-    public enum MainPage {
+    enum MainPage implements Locators{
 
+        BTN_ACCEPT_COOKIES(By::cssSelector, "#cookie_confirm_body button"),
         LNK_LANGUAGE(By::cssSelector, ".menu_lang>a.a_menu"),
         THN_META_LANGUAGE(By::xpath, "//meta[@http-equiv='set-cookie']"),
         LNK_ELECTRONICS(By::cssSelector, "h2>a[href='/%s/electronics/']"),

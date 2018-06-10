@@ -16,7 +16,6 @@ public class DataProvider {
     public DataProvider(String name) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            // convert JSON string to Map
             testData = mapper.readValue(new File("./src/test/resources/" + name + ".json"), new TypeReference<Map<String, Map<String, String>>>() {
             });
         } catch (IOException e) {

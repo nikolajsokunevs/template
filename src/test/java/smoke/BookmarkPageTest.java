@@ -1,5 +1,6 @@
 package smoke;
 
+import config.annotations.Dataset;
 import context.TestContext;
 import dto.SearchResultItem;
 import io.qameta.allure.Feature;
@@ -17,6 +18,7 @@ public class BookmarkPageTest extends TestContext {
     //@ValueSource(strings = {"RU", "EN", "LV", "EE"})
     @ValueSource(strings = {"RU"})
     @Story("Bookmark screen tests")
+    @Dataset("BookmarkPageData")
     void verifyItemsCanBeAddedToBookmarkListTest(String language) {
         List<SearchResultItem> randomSearchResultsFromRandomScreens = new ArrayList<>();
 

@@ -84,6 +84,11 @@ public class WebElementHelper {
         executor.executeScript("arguments[0].click();", element);
     }
 
+    public static void jsClick(WebElement element) {
+        JavascriptExecutor executor = (JavascriptExecutor) DriverBase.getDriver();
+        executor.executeScript("arguments[0].click();", element);
+    }
+
     public static void selectByVisiableText(By locator, String value) {
         Select select = new Select(waitForElementToBeClickable(locator));
         select.selectByVisibleText(value);

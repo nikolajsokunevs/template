@@ -22,6 +22,12 @@ public class MainModel {
         this.languagePrefix = languagePrefix.toLowerCase();
     }
 
+    static {
+        if(isElementDisplayed(BTN_ACCEPT_COOKIES.get())){
+            click(BTN_ACCEPT_COOKIES.get());
+        }
+    }
+
     @Step
     public MainModel changeLanguage() {
         Pattern pattern = Pattern.compile("LG=([a-z]+)");

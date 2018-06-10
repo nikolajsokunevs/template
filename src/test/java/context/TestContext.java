@@ -1,7 +1,9 @@
 package context;
 
 import config.ApplicationProperties;
+import config.annotations.Dataset;
 import config.webdriver.DriverBase;
+import exception.IncorrectTestDataException;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.junit5.AllureJunit5AnnotationProcessor;
 import org.apache.commons.io.FileUtils;
@@ -37,9 +39,8 @@ public class TestContext {
 
     @BeforeEach
     public void setUp(TestInfo testInfo) {
-        DriverBase.instantiateDriverObject();
         driver = DriverBase.getDriver();
-        setupTestData(testInfo.getTestMethod().get().getName());
+        setupTestData(testInfo);
     }
 
     @AfterAll
@@ -60,9 +61,15 @@ public class TestContext {
         return mainModel;
     }
 
-    private void setupTestData(String name) {
-        if (new File("./src/test/resources/" + name + ".json").exists()) {
-            data = new DataProvider(name);
+    private void setupTestData(TestInfo testInfo) {
+        boolean isAnnotated=testInfo.getTestMethod().get().isAnnotationPresent(Dataset.class);
+        if (isAnnotated){
+           String datasetName=testInfo.getTestMethod().get().getAnnotation(Dataset.class).value();
+           if (new File("./src/test/resources/" + datasetName + ".json").exists()) {
+                data = new DataProvider(datasetName);
+           }else {
+               throw new IncorrectTestDataException(String.format("Dataset with name '%s.json' does not exist in resources", datasetName));
+           }
         }
     }
 
